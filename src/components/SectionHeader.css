@@ -1,0 +1,10 @@
+.SectionHeader {
+    background-color: rgb(228, 228, 228);
+    height: 70px;
+    text-align: center;
+}
+
+.SectionHeaderText {
+    color: rgb(36, 36, 36);
+}
+
