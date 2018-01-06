@@ -12,19 +12,32 @@ class App extends Component {
     this.state = {
       posts: []
     }
+
+    this.updatePosts = this.updatePosts.bind(this)
   }
 
   componentDidMount() {
     // axios.defaults.headers.common['Access-Control-Allow-Origin'] = "*";
     axios.get(`api/posts`)
-      .then( response => this.setState({ posts: response.data })).catch(console.log)
+    .then( response => 
+      // console.log(response.data[0]))
+    this.setState({ posts: response.data })).catch(console.log)
+  }
+
+  updatePosts(val) {
+    console.log(val)
+    this.setState({
+      posts: val
+    })
+    // console.log("it worked")
+    // console.log(this.state.posts.length)
     
   }
 
   render() {
     return (
       <div className="App">
-        <h1 className="App-title">PURE OIL REVOLUTION</h1>
+        <h1 className="App-title">PURE OILs REVOLUTION</h1>
         {/* <h5 className="App-subtitle">Changing the world one DROP at a time.</h5> */}
         <Quote />
         <SectionHeader title="About Us" />
@@ -37,12 +50,11 @@ Our mission as a team, is to create confidence in managing your own well-being p
 -Nayyirah Waheed</p>
         {/* <SectionHeader title="Let's get you a sample" /> */}
         <SectionHeader title="Blog" />
-        <NewBlogPost />
+        <NewBlogPost callBack={this.updatePosts}/>
         {this.state.posts.map(
           post => (
             <div>
-              <BlogPost />
-              <BlogPost />
+              <BlogPost post={post} callback={this.updatePosts}/>
               {/* <span>Title: {post.title}</span>
               <span>Text: {post.text}</span> */}
             </div>
